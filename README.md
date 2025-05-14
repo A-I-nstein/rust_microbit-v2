@@ -1,10 +1,10 @@
 # rust_microbit-v2
-A Rust implementation of the "Meet the micro:bit" introductory program for the BBC micro:bit-v2.
+A Rust implementation of the "Meet the micro:bit" introductory program for the BBC micro:bit-v2. Link: [Meet the microbit program](https://microbit.org/get-started/user-guide/meet-the-microbit-program/)
 
 ## "Meet the micro:bit" Program Features
 
 ### [ ] Welcome Animation
-When first powered on, the LED display will usually light up with a welcoming animation, often a heart, and then guide you through a sequence of activities.
+When first powered on, the LED display will usually light up with a welcoming animation, often a heart, and play a welcome tune.
 
 ### [ ] Button Interaction (A and B)
 The program will prompt you to press button A, then button B, and sometimes both A and B together.

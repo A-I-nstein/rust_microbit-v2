@@ -20,7 +20,7 @@ struct Display {
 impl Display {
     async fn show(&mut self, display_matrix: [[u8; NUM_COLS]; NUM_ROWS], duration: u8) {
         for _ in 0..duration {
-            for r in 0..NUM_ROWS {
+            for (r, d_row) in display_matrix.iter().enumerate() {
                 for i in 0..NUM_ROWS {
                     self.row[i].set_low();
                 }
@@ -30,8 +30,8 @@ impl Display {
 
                 self.row[r].set_high();
 
-                for c in 0..NUM_COLS {
-                    if display_matrix[r][c] == 1 {
+                for (c, d_col) in d_row.iter().enumerate() {
+                    if *d_col == 1 {
                         self.col[c].set_low();
                     }
                 }
@@ -73,15 +73,13 @@ async fn main(_spawner: Spawner) {
 
     let display_matrix: [[u8; NUM_COLS]; NUM_ROWS] = [
         [0, 1, 0, 1, 0],
-        [1, 0, 1, 0, 1],
-        [1, 0, 0, 0, 1],
-        [0, 1, 0, 1, 0],
+        [1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1],
+        [0, 1, 1, 1, 0],
         [0, 0, 1, 0, 0],
     ];
 
     loop {
         display.show(display_matrix, 200).await;
-        display.clear();
-        Timer::after_millis(1000).await;
     }
 }
