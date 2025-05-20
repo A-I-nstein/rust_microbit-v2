@@ -3,7 +3,7 @@ A Rust implementation of the "Meet the micro:bit" introductory program for the B
 
 ## "Meet the micro:bit" Program Features
 
-### [ ] Welcome Animation
+### [X] Welcome Animation
 When first powered on, the LED display will usually light up with a welcoming animation, often a heart, and play a welcome tune.
 
 ### [ ] Button Interaction (A and B)

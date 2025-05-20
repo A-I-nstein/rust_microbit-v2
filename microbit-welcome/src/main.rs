@@ -5,6 +5,7 @@ use embassy_executor::{Spawner, main};
 use embassy_nrf::{
     gpio::{Level, Output, OutputDrive},
     init,
+    pwm::SimplePwm,
 };
 use embassy_time::Timer;
 use panic_halt as _;
@@ -79,7 +80,19 @@ async fn main(_spawner: Spawner) {
         [0, 0, 1, 0, 0],
     ];
 
+    let mut speaker = SimplePwm::new_1ch(peripherals.PWM0, peripherals.P0_00);
+    let hello = [262, 330, 294, 349, 392];
+
     loop {
         display.show(display_matrix, 200).await;
+        display.clear();
+
+        for frequency in hello {
+            speaker.set_period(frequency * 10);
+            speaker.set_duty(0, speaker.max_duty() / 2);
+            Timer::after_millis(200).await;
+            speaker.set_duty(0, 0);
+            Timer::after_millis(50).await;
+        }
     }
 }
